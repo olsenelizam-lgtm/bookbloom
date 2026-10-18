@@ -1,169 +1,118 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BookBloom 🌸</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Trebuchet MS", sans-serif;
-      background: #fff8f4;
-      color: #573b61;
-    }
-    header {
-      background: #ffd9e8;
-      text-align: center;
-      padding: 35px 15px;
-    }
-    h1 { font-size: 3rem; margin: 0; }
-    header p { font-size: 1.15rem; }
-    nav { margin-top: 20px; }
-    nav a {
-      color: #573b61;
-      margin: 8px;
-      font-weight: bold;
-      text-decoration: none;
-    }
-    main {
-      max-width: 900px;
-      margin: 30px auto;
-      padding: 20px;
-    }
-    .welcome, .panel {
-      background: white;
-      padding: 24px;
-      margin-bottom: 22px;
-      border-radius: 22px;
-      box-shadow: 0 4px 14px #ead9e8;
-    }
-    button {
-      background: #c9b5f5;
-      color: #39284b;
-      border: 0;
-      border-radius: 14px;
-      padding: 12px 18px;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-    textarea, input {
-      box-sizing: border-box;
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0 14px;
-      border: 2px solid #eadcfb;
-      border-radius: 12px;
-      font: inherit;
-    }
-    textarea { min-height: 180px; }
-    .shelf { background: #e1f4df; }
-    footer { text-align: center; padding: 25px; }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>🌸 BookBloom 📚</h1>
-    <p>Dream up a story. Grow a whole book!</p>
-    <nav>
-      <a href="#write">Write</a>
-      <a href="#chapters">Chapters</a>
-      <a href="#covers">Covers</a>
-      <a href="#library">My Library</a>
-    </nav>
-  </header>
+<style>
+  * {
+    box-sizing: border-box;
+  }
 
-  <main>
-    <section class="welcome">
-      <h2>Welcome, little storyteller! ✨</h2>
-      <p>Your next big adventure starts with one little idea.</p>
-      <button onclick="document.getElementById('title').focus()">
-        🌷 Start a story
-      </button>
-    </section>
+  body {
+    margin: 0;
+    font-family: "Trebuchet MS", sans-serif;
+    background: #101a20;
+    color: #f5f0dc;
+  }
 
-    <section class="panel" id="write">
-      <h2>✍️ Story Studio</h2>
-      <label for="title">Book title</label>
-      <input id="title" placeholder="My magical story...">
-      <label for="chapter">Chapter name</label>
-      <input id="chapter" placeholder="Chapter One">
-      <label for="story">Your story</label>
-      <textarea id="story" placeholder="Once upon a time..."></textarea>
-      <button onclick="saveBook()">💖 Save my book</button>
-      <p id="message"></p>
-    </section>
+  header {
+    background: #172b35;
+    color: #f5f0dc;
+    text-align: center;
+    padding: 35px 15px;
+    border-bottom: 3px solid #c5a451;
+  }
 
-    <section class="panel" id="chapters">
-      <h2>📖 Chapter Corner</h2>
-      <p>Give each part of your story its own chapter name above.</p>
-    </section>
+  h1 {
+    font-size: 3rem;
+    margin: 0;
+    color: #e6ca79;
+  }
 
-    <section class="panel" id="covers">
-      <h2>🎨 Cover Studio</h2>
-      <p>Every book deserves a lovely cover!</p>
-      <input id="coverColor" type="color" value="#ffc6df"
-        aria-label="Choose a cover color">
-      <div id="coverPreview" style="padding:35px;text-align:center;
-        border-radius:16px;background:#ffc6df;">
-        <h2 id="coverTitle">My Magical Story</h2>
-        <p>✨ A BookBloom Book ✨</p>
-      </div>
-      <button onclick="makeCover()">Create my cover</button>
-    </section>
+  header p {
+    font-size: 1.15rem;
+  }
 
-    <section class="panel shelf" id="library">
-      <h2>📚 My Bookshelf</h2>
-      <div id="books">Your saved books will appear here!</div>
-    </section>
-  </main>
+  nav {
+    margin-top: 20px;
+  }
 
-  <footer>Made with 💗 and a little bit of magic.</footer>
+  nav a {
+    color: #d9e5bd;
+    margin: 8px;
+    font-weight: bold;
+    text-decoration: none;
+  }
 
-  <script>
-    function saveBook() {
-      const book = {
-        title: document.getElementById('title').value.trim() || 'Untitled',
-        chapter: document.getElementById('chapter').value.trim() || 'Chapter One',
-        story: document.getElementById('story').value
-      };
-      const books = JSON.parse(localStorage.getItem('bookbloom') || '[]');
-      books.push(book);
-      localStorage.setItem('bookbloom', JSON.stringify(books));
-      showBooks();
-      document.getElementById('message').textContent =
-        'Saved on this browser! 🌸';
-    }
+  nav a:hover {
+    color: #e6ca79;
+  }
 
-    function showBooks() {
-      const books = JSON.parse(localStorage.getItem('bookbloom') || '[]');
-      const shelf = document.getElementById('books');
-      shelf.replaceChildren();
-      if (!books.length) {
-        shelf.textContent = 'Your saved books will appear here!';
-        return;
-      }
-      books.forEach(book => {
-        const card = document.createElement('article');
-        const heading = document.createElement('h3');
-        heading.textContent = '📕 ' + book.title;
-        const chapter = document.createElement('p');
-        chapter.textContent = book.chapter;
-        const story = document.createElement('p');
-        story.textContent = book.story;
-        card.append(heading, chapter, story);
-        shelf.append(card);
-      });
-    }
+  main {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+  }
 
-    function makeCover() {
-      document.getElementById('coverPreview').style.background =
-        document.getElementById('coverColor').value;
-      document.getElementById('coverTitle').textContent =
-        document.getElementById('title').value || 'My Magical Story';
-    }
+  .welcome, .panel {
+    background: #1b292b;
+    color: #f5f0dc;
+    padding: 24px;
+    margin-bottom: 22px;
+    border: 1px solid #53664a;
+    border-radius: 22px;
+    box-shadow: 0 4px 18px #080d12;
+  }
 
-    showBooks();
-  </script>
-</body>
-</html>
+  h2 {
+    color: #d8bd6b;
+  }
+
+  button {
+    background: #486347;
+    color: #fff8df;
+    border: 1px solid #c5a451;
+    border-radius: 14px;
+    padding: 12px 18px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #627d52;
+  }
+
+  textarea, input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 14px;
+    background: #101a20;
+    color: #f5f0dc;
+    border: 2px solid #53664a;
+    border-radius: 12px;
+    font: inherit;
+  }
+
+  input[type="color"] {
+    height: 48px;
+  }
+
+  textarea {
+    min-height: 180px;
+  }
+
+  .shelf {
+    background: #243a30;
+  }
+
+  footer {
+    text-align: center;
+    padding: 25px;
+    color: #e6ca79;
+  }
+
+  a {
+    transition: color 0.2s;
+  }
+
+  ::selection {
+    background: #c5a451;
+    color: #101a20;
+  }
+</style>
